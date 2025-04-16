@@ -15,14 +15,24 @@ class HomeViewController: UIViewController {
     var categories: [Category]? = [Category(name: "Phones",image: UIImage(named: "Mobiles")),Category(name: "Consoles",image: UIImage(named: "Consoles")),Category(name: "Laptops",image: UIImage(named: "Laptops")),Category(name: "Cameras",image: UIImage(named: "Cameras")),Category(name: "Earphones",image: UIImage(named: "Earphones"))]
     var flashSaleProducts: [Product] = []
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        regiterNibFiles()
+        getFalshSaleDetails()
+        setupObserver()
+    }
+    
+    @objc func cartUpdated() {
+        collectionViewFlashSales.reloadData()
+    }
+    
+    func regiterNibFiles(){
         collectionViewCategories.register(UINib(nibName: "CategoriesCVC", bundle: nil), forCellWithReuseIdentifier: "CategoriesCVC")
         collectionViewFlashSales.register(UINib(nibName: "FlashSaleCVC", bundle: nil), forCellWithReuseIdentifier: "FlashSaleCVC")
-        getFalshSaleDetails()
-
+    }
+    func setupObserver(){
+        NotificationCenter.default.addObserver(self, selector: #selector(cartUpdated), name: .cartUpdated, object: nil)
     }
     
     func getFalshSaleDetails() {
@@ -68,30 +78,16 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         switch collectionView {
         case collectionViewCategories:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoriesCVC", for: indexPath) as! CategoriesCVC
-            let category = categories?[indexPath.item]
-            cell.imgView.image = category?.image
-            cell.lblName.text = category?.name
+            if let category = categories?[indexPath.item] {
+                cell.configure(with: category)
+            }
             return cell
+
         case collectionViewFlashSales:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FlashSaleCVC", for: indexPath) as! FlashSaleCVC
             cell.widthContraintsOfTheView.constant = (collectionView.frame.size.width / 2) - 6
-            
             let product = flashSaleProducts[indexPath.item]
-            cell.lblProductName.text = product.title
-            cell.lblProductPrice.text = "$ \(product.price)"
-
-            if let imageUrl = URL(string: product.image) {
-                DispatchQueue.global().async {
-                    if let data = try? Data(contentsOf: imageUrl), let image = UIImage(data: data) {
-                        DispatchQueue.main.async {
-                            if let currentIndex = collectionView.indexPath(for: cell), currentIndex == indexPath {
-                                cell.imgViewProduct.image = image
-                            }
-                        }
-                    }
-                }
-            }
-
+            cell.configure(with: product)
             return cell
             
         default:
@@ -108,6 +104,5 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             self.present(detailsVC, animated: true)
         }
     }
-    
     
 }

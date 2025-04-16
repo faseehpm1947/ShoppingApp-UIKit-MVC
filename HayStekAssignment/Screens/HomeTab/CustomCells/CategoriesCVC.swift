@@ -18,5 +18,9 @@ class CategoriesCVC: UICollectionViewCell {
         viewImageBg.clipsToBounds = true
         // Initialization code
     }
+    func configure(with category: Category) {
+        lblName.text = category.name
+        imgView.image = category.image
+    }
 
 }

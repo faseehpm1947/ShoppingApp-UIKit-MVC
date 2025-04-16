@@ -19,7 +19,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0dd-BR-CyU">
                         <rect key="frame" x="0.0" y="0.0" width="206" height="250"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sdm-X0-fec">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sdm-X0-fec" customClass="MyCustomCornerView" customModule="HayStekAssignment" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="206" height="160"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7rC-Bu-VbC">
@@ -29,7 +29,7 @@
                                             <constraint firstAttribute="height" constant="120" id="GWV-WO-Bnr"/>
                                         </constraints>
                                     </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aeS-oO-tVL">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aeS-oO-tVL" customClass="MyCustomCornerView" customModule="HayStekAssignment" customModuleProvider="target">
                                         <rect key="frame" x="146" y="10" width="30" height="30"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UnFavourite" translatesAutoresizingMaskIntoConstraints="NO" id="Yg8-mO-7as">
@@ -40,13 +40,18 @@
                                                 </constraints>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Yg8-mO-7as" firstAttribute="top" secondItem="aeS-oO-tVL" secondAttribute="top" id="TBA-nA-uCE"/>
                                             <constraint firstAttribute="bottom" secondItem="Yg8-mO-7as" secondAttribute="bottom" id="WFQ-1b-PXG"/>
                                             <constraint firstItem="Yg8-mO-7as" firstAttribute="leading" secondItem="aeS-oO-tVL" secondAttribute="leading" id="l8z-cP-538"/>
                                             <constraint firstAttribute="trailing" secondItem="Yg8-mO-7as" secondAttribute="trailing" id="wOt-pT-73C"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerStyle">
+                                                <integer key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94117647410000005" green="0.94117647410000005" blue="0.94117647410000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -58,6 +63,11 @@
                                     <constraint firstItem="7rC-Bu-VbC" firstAttribute="top" secondItem="sdm-X0-fec" secondAttribute="top" constant="20" id="ghv-yD-LgR"/>
                                     <constraint firstAttribute="bottom" secondItem="7rC-Bu-VbC" secondAttribute="bottom" constant="20" id="wvb-4O-0Ug"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerStyle">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Wave House diuudydiyyd diuudgiduud" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVK-YG-yL6">
                                 <rect key="frame" x="0.0" y="170" width="206" height="33.666666666666657"/>
@@ -101,6 +111,7 @@
             </constraints>
             <size key="customSize" width="206" height="250"/>
             <connections>
+                <outlet property="imgViewFavourite" destination="Yg8-mO-7as" id="oX5-0Z-pZz"/>
                 <outlet property="imgViewProduct" destination="7rC-Bu-VbC" id="b0T-34-Itc"/>
                 <outlet property="lblProductName" destination="iVK-YG-yL6" id="IVn-G7-IT2"/>
                 <outlet property="lblProductPrice" destination="V0x-wb-tWe" id="Usv-se-ahO"/>
